@@ -11,13 +11,13 @@ export class CrudService {
 
     public getAll(collectionName: string, params: any, callback: (_: any) => void) {
         const collection: firestore.CollectionReference<firestore.DocumentData> = this.db.collection(collectionName);
-        let documentData: firestore.Query<firestore.DocumentData> = collection.where('id', '>', '') // dummy condition
+        let documentData: firestore.Query<firestore.DocumentData> = collection.offset(0)
 
         for (const key in params) {
             documentData = documentData.where(key, "==", params[key])
         }
 
-        collection.get()
+        documentData.get()
             .then(querySnapshot => {
                 const data = querySnapshot.docs.map(querySnapshotToData)
                 callback(data)
@@ -47,7 +47,7 @@ export class CrudService {
             .then(doc => {
                 let data = doc.data()
                 if (data) data.id = doc.id
-                
+
                 callback(data)
             })
             .catch(e => callback(e))
