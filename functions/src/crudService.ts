@@ -20,9 +20,9 @@ export class CrudService {
         documentData.get()
             .then(querySnapshot => {
                 const data = querySnapshot.docs.map(querySnapshotToData)
-                callback(data)
+                callback({ data })
             })
-            .catch(e => callback(e))
+            .catch(error => callback({ error }))
     }
 
     public create = (collection: string, data: any, owner: string | undefined = undefined) =>
@@ -35,9 +35,9 @@ export class CrudService {
             doc.set(data)
                 .then(_ => {
                     data.id = doc.id
-                    resolve(data)
+                    resolve({ data })
                 })
-                .catch(reject)
+                .catch(error => reject({ error }))
         })
 
     public getById(collection: string, id: any, callback: (_: any) => void) {
@@ -48,9 +48,9 @@ export class CrudService {
                 let data = doc.data()
                 if (data) data.id = doc.id
 
-                callback(data)
+                callback({ data })
             })
-            .catch(e => callback(e))
+            .catch(error => callback({ error }))
     }
 
     public update = (collection: string, id: any, newData: any) =>
@@ -70,7 +70,7 @@ export class CrudService {
                     this.db.collection(collection)
                         .doc(id)
                         .set(data)
-                        .then(_ => resolve(data))
+                        .then(_ => resolve({ data }))
                         .catch(reject)
                 })
                 .catch(reject)
