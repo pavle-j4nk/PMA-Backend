@@ -8,7 +8,7 @@ const MOCK_USER = false
 const COLLECTION_OFFER = 'offer'
 const COLLECTION_RESERVATION = 'reservation'
 const COLLECTION_NOTIFICATION_TOKEN = 'notificationToken'
-const COLLECTION_NOTIFICATION = 'notification'
+const COLLECTION_NOTIFICATION = 'notifications'
 const COLLECTION_USER = 'reservation'
 initializeApp();
 
@@ -33,7 +33,7 @@ const get = (collectionName: string) =>
 
 export const sendNotification = functions.https.onCall( (data,context) => {
    
-   //for testing use token of yours device
+   //for testing use token of your device
     var registrationToken= data.userToken;
     var message = {
         notification: {
