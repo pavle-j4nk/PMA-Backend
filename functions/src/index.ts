@@ -10,6 +10,7 @@ const COLLECTION_RESERVATION = 'reservation'
 const COLLECTION_NOTIFICATION_TOKEN = 'notificationToken'
 const COLLECTION_NOTIFICATION = 'notifications'
 const COLLECTION_USER = 'reservation'
+const COLLECTION_COMMENTS = 'comments'
 initializeApp();
 
 const db: firestore.Firestore = firestore()
@@ -80,3 +81,8 @@ export const createNotification = functions.https.onCall(create(COLLECTION_NOTIF
 export const updateNotification = functions.https.onCall(update(COLLECTION_NOTIFICATION));
 export const getNotifications = functions.https.onRequest(getAll(COLLECTION_NOTIFICATION));
 export const getNotification = functions.https.onRequest(get(COLLECTION_NOTIFICATION));
+
+export const createComment = functions.https.onCall(create(COLLECTION_COMMENTS))
+export const updateComment = functions.https.onCall(update(COLLECTION_COMMENTS));
+export const getComments = functions.https.onRequest(getAll(COLLECTION_COMMENTS));
+export const getComment = functions.https.onRequest(get(COLLECTION_COMMENTS));
