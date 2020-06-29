@@ -45,7 +45,7 @@ export class CrudService {
             .doc(id)
             .get()
             .then(doc => {
-                let data = doc.data()
+                const data = doc.data()
                 if (data) data.id = doc.id
 
                 callback({ data })
