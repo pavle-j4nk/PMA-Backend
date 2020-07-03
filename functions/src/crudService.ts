@@ -61,15 +61,9 @@ export class CrudService {
                 .then(doc => {
                     const data: any = doc.data()
 
-                    for (const key in newData) {
-                        if (key !== 'id' && key !== 'owner') {
-                            data[key] = newData[key]
-                        }
-                    }
-
                     this.db.collection(collection)
                         .doc(id)
-                        .set(data)
+                        .set({...data, ...newData})
                         .then(_ => resolve({ data }))
                         .catch(reject)
                 })
