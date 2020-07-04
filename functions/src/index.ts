@@ -49,8 +49,8 @@ export const sendNotification = functions.https.onCall((data, context) => {
     const registrationToken = data.userToken;
     const message = {
         notification: {
-            title: data.titel,
-            body: 'You recive notification from user' + data.userName
+            title: data.title,
+            body: data.body
         },
         token: registrationToken
     };
